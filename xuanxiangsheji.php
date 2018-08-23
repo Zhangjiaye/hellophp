@@ -27,12 +27,12 @@
 
 	<!-- Main CSS
    ================================================== -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css?v=5">
 
 	<!-- Google web font 
    ================================================== -->	
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
-	
+
 </head>
 <body>
 
@@ -113,7 +113,7 @@
    <div class="container">
       <div class="row">
 
-         <div class="wow fadeInUp  col-md-4 col-sm-4" >
+         <div class="wow fadeInUp  col-md-3 col-sm-3" >
 		<!-- 	<div class="project-info">
 				<h4>Client</h4>
 				<p>Ananda Co.</hp>
@@ -128,7 +128,7 @@
 			</div> -->
 		</div>
 
-		<div class="wow fadeInUp col-md-7 col-sm-7" >
+		<div class="wow fadeInUp col-md-6 col-sm-6" >
 		 <form action="tpcheck.php" method="post" target="_blank" id="myForm" >
                     <!-- onsubmit="return checkForm() --><!-- onsubmit可以阻止action的提交 -->
                    <!--  <div class="container"> -->
@@ -143,7 +143,7 @@
                         <label class="radio-inline">
                             <input type="radio" name="RadioGroup" value="选项3" /><h4>选项3</h4>
                         </label> -->
-                    <div class="col-md-3 col-sm-3">
+                    <div>
                         <?php
                             include("connect.php");
                             $sql="select * from xuanxiang where shenhe='是' ";
@@ -151,18 +151,21 @@
                             $num=mysqli_num_rows($result);
                             for($i=1;$i<$num+1;$i++){
                                 $row=mysqli_fetch_array($result);
-                                echo "<div><input type='radio' name='RadioGroup' value='".$row['schoose']."' >".$row['schoose']."</div><div><img src='http://localhost:8081/hellophp/".$row['simg']."' height=133/></div>";
+                                echo "<div class='panel panel-default'><div class='panel-body'>
+  								<div class='pull-left' style='margin-right:15px;margin-top:5px;'><input type='radio' name='RadioGroup'value='".$row['schoose']."' ></div>
+  								<div class='pull-left'><img src='http://ftp6241794.host714.zhujiwu.me/".$row['simg']."' style='width:30px;height:30px;'/></div>
+  								<div class='col-sm-4 col-xs-4' style='line-height:30px;'>".$row['schoose']."</div>
+  								</div></div>";
                             }
                         ?>
-                   <!--  </div>
-                    <div class=" col-xs-offset-15"> -->
-                        <input class="btn btn-default" type="button" value="投票" id="submit1" onclick="mySubmit()" /> 
-                        <br>
-                        <br>
-                        <a class="btn btn-primary" href="xuanxiangcheck.php">创建你的选项</a>
-                        
                     </div>
-               <!--  </div>   -->
+                    
+                    <!-- <div> -->
+                        <input class="btn btn-default" type="button" value="投票" id="submit1" onclick="mySubmit()" /> 
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-primary" href="xuanxiangcheck.php">创建你的选项</a>
+                    <!-- </div> -->
+           
                   <!--type="submit"   -->
             </form>
 		</div>
@@ -220,6 +223,19 @@
         } 
         return ck;
     }
+
+
+
+   
+	// $(document).ready(function(){
+	//   $(".panel").on("click",function(){
+	//     alert("段落被点击了。");
+	//   });
+	// });
+    
+
     </script>
+
+
 </body>
 </html>

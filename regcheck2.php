@@ -3,7 +3,10 @@ session_start();
 //注册处理
 header("Content-type:text/html;charset=utf-8");    //设置编码
 ini_set('date.timezone','Asia/Shanghai'); //设置时区
-if (isset($_POST["hidden"])&&$_POST["hidden"]=="hidden") {
+if (isset($_POST["username"])&&isset($_POST["userpwd"])&&isset($_POST["confirm"])
+	&&isset($_POST["useremail"])&&isset($_POST["code"])&&isset($_POST["hidden"])) {
+	
+	$fromid=$_POST["hidden"];
 	$user=trim($_POST["username"]);//移除字符串两侧空格
 	$pwd=md5(trim($_POST["userpwd"]));
 	$pwd_confirm=md5(trim($_POST["confirm"]));
@@ -29,7 +32,7 @@ if (isset($_POST["hidden"])&&$_POST["hidden"]=="hidden") {
 				$token=md5($user.$pwd.$regtime);//创建用于激活码识别$token即构造好的激活识别码，它是由用户名、密码和当前时间组成并md5加密得来的。
 				$token_time=time()+60*60*24;
 				
-				$sql_insert="insert into user(username,userpwd,email,token,token_time,regtime,status,admit) values('".$user."','".$pwd."','".$email."','".$token."',".$token_time.",".$regtime.",'否','否')";
+				$sql_insert="insert into user(username,userpwd,email,token,token_time,regtime,status,admit,fromid) values('".$user."','".$pwd."','".$email."','".$token."',".$token_time.",".$regtime.",'否','否',".$fromid.")";
 				$res_insert=mysqli_query($conn,$sql_insert);
 				if($res_insert){
 					// echo "<script>alert('注册成功');window.location.href='login.php'</script>";
@@ -70,14 +73,14 @@ if (isset($_POST["hidden"])&&$_POST["hidden"]=="hidden") {
 					// 添加该邮件的主题
 					$mail->Subject = '用户帐号激活';
 					// 添加邮件正文
-				// 	$mail->Body ="Welcome!".$user."：<br/>感谢您在我站注册了新帐号。<br/>请点击链接激活您的帐号。<br/> 
-				//     <a href='http://localhost:8081/hellophp/active.php?verify=".$token."' target= 
-				// '_blank'>http://localhost:8081/hellophp/active.php?verify=".$token."</a><br/> 
-				//     如果以上链接无法点击，请将它复制到你的浏览器地址栏中进入访问，该链接24小时内有效。"; 
-				    $mail->Body ="Welcome!".$user."：<br/>感谢您在我站注册了新帐号。<br/>请点击链接激活您的帐号。<br/> 
-				    <a href='http://ftp6241794.host714.zhujiwu.me/active.php?verify=".$token."' target= 
-				'_blank'>http://ftp6241794.host714.zhujiwu.me/active.php?verify=".$token."</a><br/> 
+					$mail->Body ="Welcome!".$user."：<br/>感谢您在我站注册了新帐号。<br/>请点击链接激活您的帐号。<br/> 
+				    <a href='http://localhost:8081/hellophp/active.php?verify=".$token."' target= 
+				'_blank'>http://localhost:8081/hellophp/active.php?verify=".$token."</a><br/> 
 				    如果以上链接无法点击，请将它复制到你的浏览器地址栏中进入访问，该链接24小时内有效。"; 
+				//     $mail->Body ="Welcome!".$user."：<br/>感谢您在我站注册了新帐号。<br/>请点击链接激活您的帐号。<br/> 
+				//     <a href='http://ftp6241794.host714.zhujiwu.me/active.php?verify=".$token."' target= 
+				// '_blank'>http://ftp6241794.host714.zhujiwu.me/active.php?verify=".$token."</a><br/> 
+				//     如果以上链接无法点击，请将它复制到你的浏览器地址栏中进入访问，该链接24小时内有效。"; 
 					// // 为该邮件添加附件
 					// $mail->addAttachment('./example.pdf');
 					// 发送邮件 返回状态

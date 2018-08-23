@@ -10,7 +10,7 @@ include("connect.php");
 	$pwd=md5(trim($_POST["userpwd"]));
 	$code=trim($_POST["code"]);
 	if ($user ==""||$pwd==""||$code=="") {
-		 echo "<script>history.go(-1);</script>";
+		 echo "<script>alert('非法');history.go(-1);</script>";
 	}
 	else if($code!=$_SESSION["var_code"]){
 		echo "<script>alert('验证码不正确');history.go(-1);</script>";

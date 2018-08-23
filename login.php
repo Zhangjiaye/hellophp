@@ -13,8 +13,8 @@
         body{
             background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533045642754&di=857a645e8d5ac535ded332f8bcd23505&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2Fattachments2%2Fday_110730%2F110730052762634909e8fb37d2.jpg);
             background-repeat: no-repeat;
-           /* background-size: 100% 100%;
-            height: 100%;*/
+            background-size: 100% 100%;
+            height: 100%;
         }
         input,img {vertical-align:middle;}
         .col-center-block {

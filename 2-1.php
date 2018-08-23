@@ -186,8 +186,7 @@ ini_set('date.timezone','Asia/Shanghai'); //设置时区
 <script type="text/javascript">
   function allow(id,node){
       $.get(
-        "shenhe.php?x="+id,
-        function(result,status){
+        "shenhe.php?x="+id,function(result,status){
             if (status=='success') {
               alert(result);
               $(node).parent().prev().text("是");
